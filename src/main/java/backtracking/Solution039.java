@@ -15,7 +15,7 @@ public class Solution039 {
 
         Arrays.sort(a);
 
-        dfs(a, new ArrayList<Integer>(), target);
+        // dfs(a, new ArrayList<Integer>(), target);
 
         return totalResults;
     }
@@ -32,12 +32,11 @@ public class Solution039 {
 
         if (sum > target) {
             results.remove(results.size() - 1);
-            dfs
         }
         for (int j = 0; j < a.length; i++) {
 
-             else if (sum < target) {
-                dfs(a, results, target);
+             if (sum < target) {
+                // dfs(a, results, target);
             } else {
                 return;
             }
