@@ -17,22 +17,53 @@ public class LinkedList {
         return new LinkedList(head);
     }
 
-    public void removeDescKthElemnt(int k) {
-        ListNode end = this.head;
-        for (int i = 0; i < k; i++) {
+    public LinkedList mergeSort(LinkedList other) {
+        ListNode l1 = this.head;
+        ListNode l2 = other.head;
+
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                current.next = l1;
+                l1 = l1.next;
+                current = current.next;
+            } else {
+                current.next = l2;
+                l2 = l2.next;
+                current = current.next;
+            }
+        }
+
+        if (l1 != null) {
+            current.next = l1;
+        }
+
+        if (l2 != null) {
+            current.next = l2;
+        }
+        return new LinkedList(dummy.next);
+    }
+
+    public LinkedList removeDescKthElement(int k) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = this.head;
+
+        ListNode end = dummy;
+        for (int i = 0; i < k+1; i++) {
             if (end != null) {
                 end = end.next;
             }
         }
 
-        ListNode start = this.head;
+        ListNode start = dummy;
         while (end != null) {
             end = end.next;
             start = start.next;
         }
 
-
-
+        start.next = start.next.next;
+        return new LinkedList(dummy.next);
     }
 
     public LinkedList reverse() {
