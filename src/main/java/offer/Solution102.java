@@ -1,19 +1,19 @@
 package offer;
 
-public class Solution101 {
+public class Solution102 {
 
-    public int fib(int n) {
+    public int numWays(int n) {
         if (n == 0) {
             return 0;
         }
 
-        if (n == 1) {
-            return 1;
+        if (n <= 2) {
+            return n;
         }
 
-        int one = 0, two = 1;
+        int one = 1, two = 2;
         int result = 0;
-        for (int i = 2; i <= n; i++){
+        for (int i = 3; i <= n; i++){
             result = one + two;
             if (result > 1000000007) {
                 result -= 1000000007;

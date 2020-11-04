@@ -8,6 +8,10 @@ public class ListNode {
         val = x;
     }
 
+    @Override
+    public String toString() {
+        return ListNode.toString(this);
+    }
 
     public static ListNode build(int... values) {
         if (values.length == 0) {

@@ -21,15 +21,4 @@ public class Solution06 {
         }
         return res;
     }
-
-
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 }

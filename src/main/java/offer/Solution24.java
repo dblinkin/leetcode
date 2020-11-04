@@ -4,18 +4,16 @@ public class Solution24 {
 
     public ListNode reverseList(ListNode head) {
 
-
         ListNode tail = null;
-        ListNode temp = null;
-
+        ListNode cur = head;
 
         while (head != null) {
-            tail = head;
+            cur = head;
             head = head.next;
-            head.next = tail;
 
+            cur.next = tail;
+            tail = cur;
         }
-
-
+        return cur;
     }
 }
