@@ -29,7 +29,7 @@ public class Solution29 {
                 for (int j = right - 1; j >= left ; j--) {
                     result[i++] = matrix[bottom][j];
                 }
-                for (int j = bottom ; j >= top ; j--) {
+                for (int j = bottom - 1 ; j > top ; j--) {
                     result[i++] = matrix[j][left];
                 }
             }
