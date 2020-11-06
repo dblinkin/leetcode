@@ -4,37 +4,36 @@ public class Solution19 {
 
     public boolean isMatch(String s, String p) {
 
-        char[] str = s.toCharArray();
-        char[] pattern = p.toCharArray();
 
-        boolean[] dp = new boolean[str.length + 1];
-        dp[0] = true;
+        char[] str = new char[s.length() + 1];
+        str[0] = '#';
+        System.arraycopy(s.toCharArray(), 0, str, 1, s.length());
 
-        int i = 0, j = 0;
-        while (i < str.length && j < pattern.length) {
-            dp[i + 1] = isMath(str, i, pattern, j, dp);
-            if (i < str.length) {
-                i++;
-            }
-            if (j < pattern.length) {
-                j++;
+        char[] pattern = new char[p.length() + 1];
+        pattern[0] = '#';
+        System.arraycopy(p.toCharArray(), 0, pattern, 1, p.length());
+
+        // 隐含 dp[0][0] = true;
+        boolean[][] dp = new boolean[str.length][pattern.length];
+        dp[0][0] = true;
+
+        for (int i = 0; i < str.length; i++) {
+            for (int j = 0; j < pattern.length; j++) {
+                if (i + j != 0) {
+                    dp[i][j] = isMatch(str, i, pattern, j, dp);
+                }
             }
         }
-        return dp[str.length];
 
+        return dp[str.length - 1][pattern.length - 1];
     }
 
-    public boolean isMath(char[] str, int i, char[] p, int j, boolean dp[]) {
-        int dpIndex = i + 1;
-        if (dp[dpIndex-1] && (str[i] == p[j] || p[j] == '.')) {
+    public boolean isMatch(char[] str, int i, char[] p, int j, boolean dp[][]) {
+        if (p[j] == '*' && ((j > 1 & dp[i][j-2]) || (j > 0 && dp[i][j-1]) || (i > 0 && dp[i-1][j]))) {
+            return true;
+        } else if ((str[i] == p[j] || p[j] == '.') && ( i > 0 && j > 0 && dp[i - 1][j - 1])) {
             return true;
         }
-
-        if (p[j] == '*' && (dp[dpIndex-2] || dp[dpIndex-1])) {
-            return true;
-        }
-
         return false;
-
     }
 }

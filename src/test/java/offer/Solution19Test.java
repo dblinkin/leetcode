@@ -10,11 +10,11 @@ public class Solution19Test {
     public void isMatch() {
         Solution19 solution19 = new Solution19();
 
-        assertEquals(false, solution19.isMatch("aa", "a"));
-        assertEquals(true, solution19.isMatch("aa", "a*"));
+        assertEquals(false, solution19.isMatch("mississippi", "mis*is*p*."));
         assertEquals(true, solution19.isMatch("ab", ".*"));
         assertEquals(true, solution19.isMatch("aab", "c*a*b"));
-        assertEquals(false, solution19.isMatch("mississippi", "mis*is*p*."));
+        assertEquals(false, solution19.isMatch("aa", "a"));
+        assertEquals(true, solution19.isMatch("aa", "a*"));
 
 
     }
