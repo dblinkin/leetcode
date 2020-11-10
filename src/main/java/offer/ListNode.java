@@ -8,6 +8,10 @@ public class ListNode {
         val = x;
     }
 
+    public ListNode getElementAt(int index) {
+        return ListNode.getElementAt(this, index);
+    }
+
     @Override
     public String toString() {
         return ListNode.toString(this);
@@ -25,6 +29,22 @@ public class ListNode {
             start.next = new ListNode(values[i]);
             start = start.next;
         }
+        return head;
+    }
+
+    public static ListNode getElementAt(ListNode head, int index) {
+        if (index < 0) {
+            return null;
+        }
+
+        for (int i = 0; i < index; i++) {
+            if (head.next == null) {
+                return null;
+            } else {
+                head = head.next;
+            }
+        }
+
         return head;
     }
 
