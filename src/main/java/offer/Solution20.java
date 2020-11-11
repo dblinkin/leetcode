@@ -2,87 +2,68 @@ package offer;
 
 public class Solution20 {
 
+    private int index = 0;
+
     // [Int][.unsignInt]e|E[Int]
     public boolean isNumber(String s) {
+        index = 0;
+
         if (s == null || s.length() == 0) {
             return false;
         }
 
+        s = s.trim() + "#"; // 加入结束符合
         char[] chars = s.toCharArray();
-        int index = scanInteger(chars, 0);
-        if (index == chars.length) {
+        boolean isNumber = scanInteger(chars);
+
+        if (chars[index] == '.') {
+            index++;
+            boolean hasDecimalPart = scanUnsignInteger(chars);
+
+            // 有三种情况都是正确的
+            // 123.  123.0
+            // .123  0.123
+            // 123.4
+            isNumber = (isNumber || hasDecimalPart);
+        }
+
+        if (chars[index] == 'e' || chars[index] == 'E') {
+            index++;
+            boolean hasPower = scanInteger(chars);
+            isNumber = isNumber && hasPower;
+        }
+
+        return isNumber && chars[index] == '#';
+    }
+
+    private boolean scanInteger(char[] chars) {
+        if (index >= chars.length) {
+            return false;
+        }
+
+        if (chars[index] == '+' || chars[index] == '-') {
+            index++;
+            return scanUnsignInteger(chars);
+        }
+
+        return scanUnsignInteger(chars);
+    }
+
+
+    private boolean scanUnsignInteger(char[] chars) {
+        int start = index;
+        while (index < chars.length) {
+            if ('0' <= chars[index] && chars[index] <= '9') {
+                index++;
+            } else {
+                break;
+            }
+        }
+        if (index > start) {
             return true;
         }
 
-        if (chars[index] != '.') {
-            if (index == 0) {
-                return false;
-            }
-
-            index = scanPowerInt(chars, index);
-            if (index == chars.length) {
-                return true;
-            }
-        } else {
-            int start = index + 1;
-            index = scanUnsignInteger(chars, start);
-            if (start == index) {
-                return false;
-            }
-
-            if (index == chars.length) {
-                return true;
-            }
-
-            index = scanPowerInt(chars, index);
-            if (index == chars.length) {
-                return true;
-            }
-        }
         return false;
-    }
-
-    private int scanPowerInt(char[] chars, int start) {
-        if (chars[start] != 'e' && chars[start] != 'E') {
-            return start;
-        }
-
-        int index = scanInteger(chars, start + 1);
-        if (index > start + 1) {
-            return index;
-        } else {
-            return start;
-        }
-    }
-
-
-    private int scanInteger(char[] chars, int start) {
-        if (start >= chars.length) {
-            return start;
-        }
-
-        if (chars[start] == '+' || chars[start] == '-') {
-            int index = scanUnsignInteger(chars, start + 1);
-            if (index > start + 1) {
-                return index;
-            } else {
-                return start;
-            }
-        }
-
-        return scanUnsignInteger(chars, start);
-    }
-
-
-    private int scanUnsignInteger(char[] chars, int start) {
-        while (start < chars.length) {
-            if ('0' <= chars[start] && chars[start] <= '9') {
-                start++;
-            } else {
-                return start;
-            }
-        }
-        return start;
     }
 
 }

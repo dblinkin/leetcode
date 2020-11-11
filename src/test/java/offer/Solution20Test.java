@@ -10,7 +10,8 @@ public class Solution20Test {
     public void isNumber() {
         Solution20 solution20 = new Solution20();
 
-        assertEquals(false, solution20.isNumber("e9"));
+        assertEquals(true, solution20.isNumber("16.e3"));
+        assertEquals(true, solution20.isNumber("1 "));
 
         assertEquals(false, solution20.isNumber(""));
         assertEquals(false, solution20.isNumber("."));
@@ -22,6 +23,7 @@ public class Solution20Test {
         assertEquals(true, solution20.isNumber("123.123"));
 
 
+        assertEquals(true, solution20.isNumber("1"));
         assertEquals(true, solution20.isNumber("+100"));
         assertEquals(true, solution20.isNumber("5e2"));
         assertEquals(true, solution20.isNumber("-123"));
