@@ -10,6 +10,10 @@ public class Solution39Test {
     public void testMajorityElement() throws Exception {
         Solution39 solution39 = new Solution39();
 
+        assertEquals(1, solution39.majorityElement(new int[]{1,2,1}));
+
+        assertEquals(3, solution39.majorityElement(new int[]{3,2,3}));
+        assertEquals(1, solution39.majorityElement(new int[]{1,2,1}));
         assertEquals(3, solution39.majorityElement(new int[]{3,2,3}));
         assertEquals(-1, solution39.majorityElement(new int[]{}));
         assertEquals(1, solution39.majorityElement(new int[]{1}));

@@ -21,7 +21,8 @@ public class Node {
 
     @Override
     public String toString() {
-        return Arrays.toString(toArray(this));
+//        return Arrays.toString(toArray(this));
+        return String.valueOf(val);
     }
 
     public static offer.Node build(Integer[] values) {
