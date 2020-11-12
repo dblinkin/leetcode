@@ -46,7 +46,6 @@ public class Solution36 {
         }
 
         Nodes leftNodes = new Nodes();
-        convert(root.left, );
 
 
     }
