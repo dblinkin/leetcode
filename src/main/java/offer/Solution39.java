@@ -54,4 +54,7 @@ public class Solution39 {
         nums[right] = nums[start];
         nums[start] = temp;
     }
+
+
+
 }
