@@ -7,8 +7,47 @@ public class Solution39 {
             return -1;
         }
 
-        partition0(nums, 0, nums.length - 1);
-        return nums[nums.length / 2];
+        int start = 0;
+        int end = nums.length - 1;
+        int index = partition(nums, start, end);
+        int target = nums.length / 2;
+        while (index != target) {
+            if (index > target) {
+                end = index;
+            } else if (index < target) {
+                start = index;
+            } else {
+                return nums[index];
+            }
+            index = partition(nums, start, end);
+        }
+        return -1;
+    }
+
+    private int partition(int[] nums, int start, int end) {
+        int pivot = nums[end];
+        int left = start;
+        int right = end - 1;
+        while (left <= right) {
+            while (left < right && nums[left] <= pivot) {
+                left++;
+            }
+
+            while (left < right && nums[right] > pivot) {
+                right--;
+            }
+
+            if (left < right) {
+                int temp = nums[right];
+                nums[right] = nums[left];
+                nums[left] = temp;
+            }
+        }
+
+        int temp = nums[end];
+        nums[end] = nums[left];
+        nums[left] = temp;
+        return left;
     }
 
     private void partition0(int[] nums, int start, int end) {
@@ -31,30 +70,5 @@ public class Solution39 {
         }
         nums[left] = key;
     }
-
-    private void partition(int[] nums, int start, int end) {
-        int pivot = nums[start];
-        int left = start+1;
-        int right = end;
-        while (left < right) {
-            while (left < right && nums[right] >= pivot) {
-                right--;
-            }
-
-            while (left < right && nums[left] <= pivot) {
-                left++;
-            }
-
-            int temp = nums[right];
-            nums[right] = nums[left];
-            nums[left] = temp;
-        }
-
-        int temp = nums[right];
-        nums[right] = nums[start];
-        nums[start] = temp;
-    }
-
-
 
 }
