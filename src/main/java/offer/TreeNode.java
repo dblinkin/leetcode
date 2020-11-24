@@ -17,7 +17,7 @@ public class TreeNode {
 
     @Override
     public String toString() {
-        return Arrays.toString(toArray(this));
+        return java.util.Arrays.toString(toArray(this));
     }
 
     public static TreeNode build(Integer[] values) {
